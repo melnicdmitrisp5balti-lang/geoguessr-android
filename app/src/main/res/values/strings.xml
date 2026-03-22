@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GeoGuessr</string>
+
+    <!-- Auth -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_nickname">Nickname</string>
+    <string name="btn_login">Log In</string>
+    <string name="btn_register">Register</string>
+    <string name="prompt_register">Don\'t have an account? Register</string>
+    <string name="prompt_login">Already have an account? Log In</string>
+    <string name="title_register">Create Account</string>
+
+    <!-- Lobby -->
+    <string name="title_lobby">Lobby</string>
+    <string name="btn_create_room">Create Room</string>
+    <string name="btn_join">Join</string>
+    <string name="hint_room_code">Room Code</string>
+    <string name="room_code_format">Room Code: %s</string>
+    <string name="label_players">Players:</string>
+    <string name="btn_start_game">Start Game</string>
+    <string name="error_enter_code">Please enter a room code</string>
+
+    <!-- Game -->
+    <string name="round_info">Round %d</string>
+    <string name="round_info_default">Round 1</string>
+    <string name="timer_format">%d s</string>
+    <string name="btn_submit_guess">Submit Guess</string>
+    <string name="label_scoreboard">Scoreboard</string>
+    <string name="label_round_result">Round Result</string>
+    <string name="round_score">+%d points</string>
+    <string name="btn_next_round">Next Round</string>
+
+    <!-- Results -->
+    <string name="label_game_over">Game Over!</string>
+    <string name="label_winner">🏆 Winner</string>
+    <string name="label_final_scores">Final Scores</string>
+    <string name="btn_play_again">Play Again</string>
+
+    <!-- Maps -->
+    <string name="google_maps_key" translatable="false">YOUR_GOOGLE_MAPS_API_KEY</string>
+</resources>
