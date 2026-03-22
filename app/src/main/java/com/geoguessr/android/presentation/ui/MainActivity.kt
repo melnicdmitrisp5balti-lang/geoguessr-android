@@ -1,30 +1,32 @@
 package com.geoguessr.android.presentation.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.geoguessr.android.R
-import com.geoguessr.android.databinding.ActivityMainBinding
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import com.geoguessr.android.domain.repository.AuthRepository
+import com.geoguessr.android.presentation.navigation.NavGraph
+import com.geoguessr.android.presentation.navigation.Screen
+import com.geoguessr.android.presentation.theme.GeoGuessrTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : ComponentActivity() {
 
-    private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+    @Inject
+    lateinit var authRepository: AuthRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        setContent {
+            GeoGuessrTheme {
+                val startDestination = if (authRepository.isLoggedIn()) {
+                    Screen.Lobby.route
+                } else {
+                    Screen.Login.route
+                }
+                NavGraph(startDestination = startDestination)
+            }
+        }
     }
 }
