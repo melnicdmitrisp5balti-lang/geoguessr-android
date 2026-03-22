@@ -44,7 +44,7 @@ class ResultsFragment : Fragment() {
 
     private fun loadResults() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val room = gameRepository.observeRoom(args.roomId).firstOrNull()
+            val room = gameRepository.observeRoom(args.roomId).first()
             room ?: return@launch
             val sorted = room.players.values.sortedByDescending { it.totalScore }
             val winner = sorted.firstOrNull()
