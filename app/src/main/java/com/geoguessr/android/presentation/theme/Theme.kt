@@ -5,23 +5,24 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.runtime.Composable
 
 private val GeoDarkColorScheme = darkColorScheme(
-    primary = GeoGreen,
-    onPrimary = GeoOnPrimary,
-    primaryContainer = GeoGreenDark,
-    onPrimaryContainer = GeoGreenLight,
-    secondary = GeoBlue,
-    onSecondary = GeoOnSurface,
-    secondaryContainer = GeoBlueDark,
-    onSecondaryContainer = GeoBlueLight,
-    background = GeoBackground,
-    onBackground = GeoOnBackground,
-    surface = GeoSurface,
-    onSurface = GeoOnSurface,
-    surfaceVariant = GeoSurfaceVariant,
+    primary = GeoCyan,
+    onPrimary = GeoBgPrimary,
+    primaryContainer = GeoBgTertiary,
+    onPrimaryContainer = GeoCyan,
+    secondary = GeoGreen,
+    onSecondary = GeoBgPrimary,
+    secondaryContainer = GeoBgSecondary,
+    onSecondaryContainer = GeoGreen,
+    background = GeoBgPrimary,
+    onBackground = GeoTextPrimary,
+    surface = GeoBgSecondary,
+    onSurface = GeoTextPrimary,
+    surfaceVariant = GeoBgTertiary,
+    onSurfaceVariant = GeoTextSecondary,
     error = GeoError,
     errorContainer = GeoErrorContainer,
-    onError = GeoOnSurface,
-    onErrorContainer = GeoOnSurface
+    onError = GeoTextPrimary,
+    onErrorContainer = GeoTextPrimary
 )
 
 @Composable

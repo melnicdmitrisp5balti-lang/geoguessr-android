@@ -1,6 +1,8 @@
 package com.geoguessr.android.data.repository
 
 import com.geoguessr.android.domain.model.*
+import com.geoguessr.android.domain.model.GameSession
+import com.geoguessr.android.domain.model.PlayerProfile
 import com.geoguessr.android.domain.repository.GameRepository
 import com.geoguessr.android.domain.usecase.ScoreCalculator
 import com.google.firebase.database.DataSnapshot
@@ -182,5 +184,62 @@ class GameRepositoryImpl @Inject constructor(
         }
 
         return GameRoom(roomId, code, ownerId, players, status, emptyList(), totalRounds, currentRound)
+    }
+
+    override suspend fun saveGameSession(session: GameSession): Result<Unit> = runCatching {
+        val userId = session.playerId
+        if (userId.isEmpty()) return@runCatching
+        val sessionRef = database.getReference("sessions/$userId").push()
+        val data = mapOf(
+            "gameType" to session.gameType,
+            "totalScore" to session.totalScore,
+            "rounds" to session.rounds.size,
+            "timestamp" to session.timestamp
+        )
+        sessionRef.setValue(data).await()
+        val profileRef = database.getReference("profiles/$userId")
+        val snapshot = profileRef.get().await()
+        val currentGames = snapshot.child("gamesPlayed").getValue(Int::class.java) ?: 0
+        val currentTotal = snapshot.child("totalScore").getValue(Int::class.java) ?: 0
+        val currentBest = snapshot.child("bestScore").getValue(Int::class.java) ?: 0
+        val nickname = snapshot.child("nickname").getValue(String::class.java) ?: ""
+        profileRef.updateChildren(mapOf(
+            "gamesPlayed" to currentGames + 1,
+            "totalScore" to currentTotal + session.totalScore,
+            "bestScore" to maxOf(currentBest, session.totalScore),
+            "nickname" to nickname
+        )).await()
+    }
+
+    override suspend fun getPlayerProfile(userId: String): PlayerProfile {
+        if (userId.isEmpty()) return PlayerProfile()
+        return try {
+            val snapshot = database.getReference("profiles/$userId").get().await()
+            PlayerProfile(
+                userId = userId,
+                nickname = snapshot.child("nickname").getValue(String::class.java) ?: "",
+                totalScore = snapshot.child("totalScore").getValue(Int::class.java) ?: 0,
+                gamesPlayed = snapshot.child("gamesPlayed").getValue(Int::class.java) ?: 0,
+                bestScore = snapshot.child("bestScore").getValue(Int::class.java) ?: 0
+            )
+        } catch (e: Exception) {
+            PlayerProfile(userId = userId)
+        }
+    }
+
+    override suspend fun getLeaderboard(): List<Pair<String, Int>> {
+        return try {
+            val snapshot = database.getReference("profiles").get().await()
+            snapshot.children
+                .mapNotNull { child ->
+                    val nickname = child.child("nickname").getValue(String::class.java) ?: return@mapNotNull null
+                    val score = child.child("totalScore").getValue(Int::class.java) ?: 0
+                    if (nickname.isBlank()) null else nickname to score
+                }
+                .sortedByDescending { it.second }
+                .take(10)
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }
