@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             GeoGuessrTheme {
                 val startDestination = if (authRepository.isLoggedIn()) {
-                    Screen.Lobby.route
+                    Screen.Home.route
                 } else {
                     Screen.Login.route
                 }

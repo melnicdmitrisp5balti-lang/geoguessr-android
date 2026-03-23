@@ -1,7 +1,9 @@
 package com.geoguessr.android.domain.repository
 
 import com.geoguessr.android.domain.model.GameRoom
+import com.geoguessr.android.domain.model.GameSession
 import com.geoguessr.android.domain.model.Location
+import com.geoguessr.android.domain.model.PlayerProfile
 import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {
@@ -18,4 +20,7 @@ interface GameRepository {
     ): Result<Int>
     suspend fun getRandomLocation(): Result<Location>
     suspend fun finishGame(roomId: String): Result<Unit>
+    suspend fun saveGameSession(session: GameSession): Result<Unit>
+    suspend fun getPlayerProfile(userId: String): PlayerProfile
+    suspend fun getLeaderboard(): List<Pair<String, Int>>
 }
