@@ -9,7 +9,6 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.geoguessr.android.presentation.screen.game.ClassicGameScreen
 import com.geoguessr.android.presentation.screen.game.GameResultScreen
-import com.geoguessr.android.presentation.screen.game.GameScreen
 import com.geoguessr.android.presentation.screen.home.HomeScreen
 import com.geoguessr.android.presentation.screen.leaderboard.LeaderboardScreen
 import com.geoguessr.android.presentation.screen.login.LoginScreen

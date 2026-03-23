@@ -113,6 +113,7 @@ class ClassicGameViewModel @Inject constructor(
         val nextRound = state.currentRound + 1
 
         if (nextRound > state.totalRounds) {
+            GameResultCache.store(state.roundResults, state.totalScore)
             saveSession(state)
             _uiState.update { it.copy(phase = ClassicGamePhase.GAME_OVER) }
         } else {

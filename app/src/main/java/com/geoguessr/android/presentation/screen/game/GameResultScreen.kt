@@ -14,8 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.geoguessr.android.domain.model.RoundResult
 import com.geoguessr.android.presentation.theme.*
 
@@ -23,11 +21,9 @@ import com.geoguessr.android.presentation.theme.*
 fun GameResultScreen(
     totalScore: Int,
     onPlayAgain: () -> Unit,
-    onBackToMenu: () -> Unit,
-    viewModel: ClassicGameViewModel = hiltViewModel()
+    onBackToMenu: () -> Unit
 ) {
-    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
-    val rounds = uiState.roundResults
+    val rounds = GameResultCache.lastRoundResults
 
     Column(
         modifier = Modifier

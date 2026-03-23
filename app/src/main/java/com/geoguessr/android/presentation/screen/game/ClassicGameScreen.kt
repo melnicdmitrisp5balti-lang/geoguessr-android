@@ -1,6 +1,5 @@
 package com.geoguessr.android.presentation.screen.game
 
-import android.os.Bundle
 import androidx.compose.animation.*
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
