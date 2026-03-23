@@ -113,7 +113,7 @@ fun ProfileScreen(
                         modifier = Modifier.weight(1f)
                     )
                     Text(
-                        "${uiState.totalScore / maxOf(uiState.gamesPlayed, 1)} pts",
+                        "${uiState.totalScore / uiState.gamesPlayed} pts",
                         style = MaterialTheme.typography.titleMedium,
                         color = GeoCyan,
                         fontWeight = FontWeight.Bold

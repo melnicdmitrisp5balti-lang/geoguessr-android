@@ -117,7 +117,7 @@ fun MultiplayerLobbyScreen(
                             ) {
                                 Text("Room Code", style = MaterialTheme.typography.labelMedium, color = GeoTextSecondary)
                                 Text(
-                                    uiState.createdRoomCode!!,
+                                    uiState.createdRoomCode,,
                                     style = MaterialTheme.typography.displaySmall,
                                     color = GeoCyan,
                                     fontWeight = FontWeight.ExtraBold

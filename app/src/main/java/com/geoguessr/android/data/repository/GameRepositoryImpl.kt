@@ -188,7 +188,7 @@ class GameRepositoryImpl @Inject constructor(
 
     override suspend fun saveGameSession(session: GameSession): Result<Unit> = runCatching {
         val userId = session.playerId
-        if (userId.isEmpty()) return@runCatching
+        if (userId.isEmpty()) return Result.failure(IllegalArgumentException("Player ID must not be empty"))
         val sessionRef = database.getReference("sessions/$userId").push()
         val data = mapOf(
             "gameType" to session.gameType,

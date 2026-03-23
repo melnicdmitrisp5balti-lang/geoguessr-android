@@ -41,7 +41,8 @@ class HomeViewModel @Inject constructor(
 
         viewModelScope.launch {
             try {
-                val profile = gameRepository.getPlayerProfile(user?.uid ?: "")
+                val uid = user?.uid ?: return@launch
+                val profile = gameRepository.getPlayerProfile(uid)
                 _uiState.update {
                     it.copy(
                         totalScore = profile.totalScore,

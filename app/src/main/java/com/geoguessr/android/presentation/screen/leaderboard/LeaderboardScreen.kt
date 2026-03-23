@@ -88,7 +88,12 @@ fun LeaderboardScreen(
 @Composable
 private fun LeaderboardItem(rank: Int, name: String, score: Int) {
     val isTop3 = rank <= 3
-    val rankEmoji = when (rank) { 1 -> "🥇"; 2 -> "🥈"; 3 -> "🥉"; else -> "#$rank" }
+    val rankEmoji = when (rank) {
+        1 -> "🥇"
+        2 -> "🥈"
+        3 -> "🥉"
+        else -> "#$rank"
+    }
     val cardColor = if (rank == 1) GeoBgTertiary else GeoBgSecondary
     val borderColor = when (rank) {
         1 -> GeoYellow.copy(alpha = 0.5f)

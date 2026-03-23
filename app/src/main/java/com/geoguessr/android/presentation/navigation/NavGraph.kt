@@ -109,7 +109,7 @@ fun NavGraph(
                 gameType = gameType,
                 onGameFinished = { totalScore ->
                     navController.navigate(Screen.GameResult.createRoute(totalScore)) {
-                        popUpTo(Screen.Home.route)
+                        popUpTo(Screen.Home.route) { inclusive = false }
                     }
                 }
             )
@@ -124,7 +124,7 @@ fun NavGraph(
                 totalScore = totalScore,
                 onPlayAgain = {
                     navController.navigate(Screen.ClassicGame.createRoute("CLASSIC")) {
-                        popUpTo(Screen.Home.route)
+                        popUpTo(Screen.Home.route) { inclusive = false }
                     }
                 },
                 onBackToMenu = {
@@ -155,7 +155,7 @@ fun NavGraph(
                 roomId = roomId,
                 onGameFinished = { totalScore ->
                     navController.navigate(Screen.GameResult.createRoute(totalScore)) {
-                        popUpTo(Screen.Home.route)
+                        popUpTo(Screen.Home.route) { inclusive = false }
                     }
                 }
             )
